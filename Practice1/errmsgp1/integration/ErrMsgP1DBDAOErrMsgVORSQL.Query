@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="ErrMsgP1DBDAOErrMsgVORSQL">
+			<desc><![CDATA[   ]]></desc>
+			<sql><![CDATA[
+select err_msg_cd, err_tp_cd, err_lvl_cd,err_msg,err_desc,cre_usr_id, upd_usr_id
+from com_err_msg
+where 1 = 1 
+#if (${err_msg_cd} != '')
+and UPPER(err_msg_cd) like '%'||UPPER(@[err_msg_cd])||'%'
+#end
+#if(${err_msg} != '')
+and UPPER(err_msg) like'%'||UPPER(@[err_msg])||'%'
+#end			]]></sql>
+			<params>
+				<param name="err_msg_cd" type="12" value="" out="N"/>
+				<param name="err_msg" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

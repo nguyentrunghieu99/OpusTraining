@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="DetailsValidateDBDAODetailsVORSQL">
+			<desc><![CDATA[a]]></desc>
+			<sql><![CDATA[
+SELECT 
+	COUNT(INTG_CD_VAL_CTNT)
+FROM COM_INTG_CD_DTL
+WHERE INTG_CD_VAL_CTNT LIKE @[intg_cd_val_ctnt]			]]></sql>
+			<params>
+				<param name="intg_cd_val_ctnt" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CodeValidateDBDAOCodeVORSQL">
+			<desc><![CDATA[Validation]]></desc>
+			<sql><![CDATA[
+SELECT 
+	COUNT(INTG_CD_ID)
+FROM COM_INTG_CD
+WHERE INTG_CD_ID LIKE @[intg_cd_id]			]]></sql>
+			<params>
+				<param name="intg_cd_id" type="12" value="" out="N"/>
+			</params>
+		</query>
+	</querys>
+</sqls>
