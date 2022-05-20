@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierDBDAOSearchTradeRSQL">
+			<desc><![CDATA[a]]></desc>
+			<sql><![CDATA[
+SELECT 
+	DISTINCT(trd_cd) as trd_cd
+FROM JOO_CARRIER
+ORDER BY trd_cd			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>

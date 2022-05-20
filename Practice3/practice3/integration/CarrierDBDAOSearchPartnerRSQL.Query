@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierDBDAOSearchPartnerRSQL">
+			<desc><![CDATA[SearchPartner]]></desc>
+			<sql><![CDATA[
+SELECT 
+	DISTINCT(jo_crr_cd) as jo_crr_cd
+FROM JOO_CARRIER
+ORDER BY jo_crr_cd			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>

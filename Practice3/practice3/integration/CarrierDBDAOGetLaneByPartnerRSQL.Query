@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierDBDAOGetLaneByPartnerRSQL">
+			<desc><![CDATA[.]]></desc>
+			<sql><![CDATA[
+select DISTINCT RLANE_CD
+from JOO_CARRIER
+WHERE
+JO_CRR_CD    IN ( #foreach($key IN ${listCrrCd})#if($velocityCount < $listCrrCd.size()) '$key', #else '$key' #end #end)			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>
