@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierDBDAOGetCrrRSQL">
+			<desc><![CDATA[.]]></desc>
+			<sql><![CDATA[
+SELECT 
+	DISTINCT(jo_crr_cd) as jo_crr_cd
+FROM JOO_CARRIER			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>

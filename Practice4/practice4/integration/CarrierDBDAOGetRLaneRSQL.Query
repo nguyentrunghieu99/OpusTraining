@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+	<querys>
+		<query name="CarrierDBDAOGetRLaneRSQL">
+			<desc><![CDATA[.]]></desc>
+			<sql><![CDATA[
+SELECT 
+	DISTINCT(rlane_cd) as rlane_cd
+FROM JOO_CARRIER
+ORDER BY rlane_cd ASC			]]></sql>
+			<params>
+			</params>
+		</query>
+	</querys>
+</sqls>
