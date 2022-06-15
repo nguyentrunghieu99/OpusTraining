@@ -1,6 +1,6 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CarrierDBDAOGetTotalSumRSQL.java
+*@FileName : CarrierDBDAOCarrierDetailsRSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
+public class CarrierDBDAOCarrierDetailsRSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -34,10 +34,10 @@ public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  * DESC Enter..
+	  * .
 	  * </pre>
 	  */
-	public CarrierDBDAOGetTotalSumRSQL(){
+	public CarrierDBDAOCarrierDetailsRSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
 		String tmp = null;
@@ -72,7 +72,7 @@ public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
 
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.dou.doutraining.practice3.integration").append("\n"); 
-		query.append("FileName : CarrierDBDAOGetTotalSumRSQL").append("\n"); 
+		query.append("FileName : CarrierDBDAOCarrierDetailsRSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -88,35 +88,68 @@ public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("SELECT INV.LOCL_CURR_CD" ).append("\n"); 
-		query.append("" ).append("\n"); 
+		query.append("SELECT INV.JO_CRR_CD" ).append("\n"); 
+		query.append("     , INV.RLANE_CD" ).append("\n"); 
+		query.append("     , INV.LOCL_CURR_CD" ).append("\n"); 
+		query.append("     , INV.INV_NO" ).append("\n"); 
+		query.append("     , INV.CSR_NO" ).append("\n"); 
+		query.append("     , INV.APRO_FLG" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_CNT_CD" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_SEQ" ).append("\n"); 
+		query.append("     , INV.PRNR_REF_NO" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_ENG_NM" ).append("\n"); 
+		query.append("	 , INV.REV_EXP" ).append("\n"); 
+		query.append("	 , INV.ITEM" ).append("\n"); 
 		query.append("     , SUM(INV.REV_ACT_AMT) AS INV_REV_ACT_AMT" ).append("\n"); 
-		query.append("     , SUM(INV.EXP_ACT_AMT) AS INV_EXP_ACT_AMT " ).append("\n"); 
-		query.append("  FROM (  " ).append("\n"); 
-		query.append("    SELECT  NVL(INV.INV_CURR_CD, INV.LOCL_CURR_CD) AS LOCL_CURR_CD" ).append("\n"); 
+		query.append("     , SUM(INV.EXP_ACT_AMT) AS INV_EXP_ACT_AMT" ).append("\n"); 
+		query.append("  FROM (" ).append("\n"); 
+		query.append("    SELECT INV.JO_CRR_CD" ).append("\n"); 
+		query.append("	 , INV.RE_DIVR_CD AS REV_EXP" ).append("\n"); 
+		query.append("	 , STL.JO_STL_ITM_CD AS ITEM" ).append("\n"); 
+		query.append("     , STL.RLANE_CD" ).append("\n"); 
+		query.append("     , NVL(INV.INV_CURR_CD, INV.LOCL_CURR_CD) AS LOCL_CURR_CD" ).append("\n"); 
+		query.append("     , DTL.ACT_AMT" ).append("\n"); 
+		query.append("     , INV.INV_NO" ).append("\n"); 
+		query.append("     , NVL(INV.SLP_TP_CD||INV.SLP_FUNC_CD||INV.SLP_OFC_CD||INV.SLP_ISS_DT||INV.SLP_SER_NO,'N/A') AS CSR_NO" ).append("\n"); 
+		query.append("     , NVL(CSR.APRO_FLG, 'N') AS APRO_FLG" ).append("\n"); 
+		query.append("     , DECODE(INV.RE_DIVR_CD,'R',SUBSTR(INV.PRNR_REF_NO,1,2), NULL) AS CUST_VNDR_CNT_CD" ).append("\n"); 
+		query.append("     , DECODE(INV.RE_DIVR_CD,'R',SUBSTR(INV.PRNR_REF_NO,3), INV.PRNR_REF_NO) AS CUST_VNDR_SEQ" ).append("\n"); 
+		query.append("     , INV.PRNR_REF_NO" ).append("\n"); 
 		query.append("     , DECODE('R', STL.RE_DIVR_CD, NVL(DTL.LOCL_AMT, DTL.ACT_AMT), 0) AS REV_ACT_AMT" ).append("\n"); 
 		query.append("     , DECODE('E', STL.RE_DIVR_CD, NVL(DTL.LOCL_AMT, DTL.ACT_AMT), 0) AS EXP_ACT_AMT" ).append("\n"); 
+		query.append("     , CASE WHEN INV.RE_DIVR_CD = 'R' THEN" ).append("\n"); 
+		query.append("                 ( SELECT M.CUST_LGL_ENG_NM" ).append("\n"); 
+		query.append("                     FROM MDM_CUSTOMER M" ).append("\n"); 
+		query.append("                    WHERE M.DELT_FLG = 'N'" ).append("\n"); 
+		query.append("                      AND M.CUST_CNT_CD   = SUBSTR(INV.PRNR_REF_NO,1,2)" ).append("\n"); 
+		query.append("                      AND M.CUST_SEQ      = SUBSTR(INV.PRNR_REF_NO,3) )" ).append("\n"); 
+		query.append("            ELSE" ).append("\n"); 
+		query.append("                 ( SELECT M.VNDR_LGL_ENG_NM" ).append("\n"); 
+		query.append("                     FROM MDM_VENDOR M" ).append("\n"); 
+		query.append("                    WHERE M.DELT_FLG = 'N'" ).append("\n"); 
+		query.append("                      AND M.VNDR_SEQ      = INV.PRNR_REF_NO )" ).append("\n"); 
+		query.append("       END AS CUST_VNDR_ENG_NM" ).append("\n"); 
 		query.append("    FROM JOO_INVOICE INV" ).append("\n"); 
 		query.append("     , JOO_INV_DTL DTL" ).append("\n"); 
 		query.append("     , JOO_STL_TGT STL" ).append("\n"); 
 		query.append("     , JOO_CSR     CSR" ).append("\n"); 
 		query.append("    WHERE 1=1" ).append("\n"); 
-		query.append("    AND NVL(STL.THEA_STL_FLG, 'N') = 'N'" ).append("\n"); 
+		query.append("    AND INV.RJCT_CMB_FLG  = 'N'" ).append("\n"); 
 		query.append("	#if (${fr_acct_yrmon} != '' && ${to_acct_yrmon} != '')" ).append("\n"); 
 		query.append("	AND INV.ACCT_YRMON   BETWEEN REPLACE(@[fr_acct_yrmon],'-','') AND REPLACE(@[to_acct_yrmon],'-','')" ).append("\n"); 
 		query.append("	#end" ).append("\n"); 
 		query.append("" ).append("\n"); 
 		query.append("" ).append("\n"); 
-		query.append("		#if (${listCrrCd} != '')" ).append("\n"); 
-		query.append("        AND INV.JO_CRR_CD    IN ( #foreach($key IN ${listCrrCd})#if($velocityCount < $listCrrCd.size()) '$key', #else '$key' #end #end)" ).append("\n"); 
-		query.append("		#end" ).append("\n"); 
+		query.append("	#if (${listCrrCd} != '')" ).append("\n"); 
+		query.append("    AND INV.JO_CRR_CD    IN ( #foreach($key IN ${listCrrCd})#if($velocityCount < $listCrrCd.size()) '$key', #else '$key' #end #end)" ).append("\n"); 
+		query.append("	#end" ).append("\n"); 
 		query.append("" ).append("\n"); 
-		query.append("		#if (${rlane_cd}!='')" ).append("\n"); 
-		query.append("		AND STL.RLANE_CD   = @[rlane_cd]" ).append("\n"); 
-		query.append("		#end" ).append("\n"); 
+		query.append("	#if (${rlane_cd}!='')" ).append("\n"); 
+		query.append("	AND STL.RLANE_CD   = @[rlane_cd]" ).append("\n"); 
+		query.append("	#end" ).append("\n"); 
 		query.append("" ).append("\n"); 
-		query.append("		#if (${trd_cd}!='')" ).append("\n"); 
-		query.append("	   	AND EXISTS   (   SELECT 'X'" ).append("\n"); 
+		query.append("	#if (${trd_cd}!='')" ).append("\n"); 
+		query.append("	 AND EXISTS   (   SELECT 'X'" ).append("\n"); 
 		query.append("						  FROM JOO_CARRIER CRR" ).append("\n"); 
 		query.append("						 WHERE 1=1" ).append("\n"); 
 		query.append("						   AND CRR.DELT_FLG         = 'N'" ).append("\n"); 
@@ -124,9 +157,7 @@ public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
 		query.append("						   AND CRR.RLANE_CD         = STL.RLANE_CD" ).append("\n"); 
 		query.append("						   AND CRR.MODI_COST_CTR_CD  = @[trd_cd]" ).append("\n"); 
 		query.append("					 )" ).append("\n"); 
-		query.append("		#end" ).append("\n"); 
-		query.append("	" ).append("\n"); 
-		query.append("    AND INV.RJCT_CMB_FLG  = 'N'" ).append("\n"); 
+		query.append("	#end" ).append("\n"); 
 		query.append("    AND DTL.ACCT_YRMON    = INV.ACCT_YRMON" ).append("\n"); 
 		query.append("    AND DTL.JO_CRR_CD     = INV.JO_CRR_CD" ).append("\n"); 
 		query.append("    AND DTL.INV_NO        = INV.INV_NO" ).append("\n"); 
@@ -145,7 +176,19 @@ public class CarrierDBDAOGetTotalSumRSQL implements ISQLTemplate{
 		query.append("    AND INV.SLP_SER_NO    = CSR.SLP_SER_NO(+)" ).append("\n"); 
 		query.append("    )INV" ).append("\n"); 
 		query.append("    WHERE 1=1" ).append("\n"); 
-		query.append("    GROUP BY INV.LOCL_CURR_CD" ).append("\n"); 
+		query.append(" GROUP BY INV.JO_CRR_CD" ).append("\n"); 
+		query.append("     , INV.RLANE_CD" ).append("\n"); 
+		query.append("     , INV.LOCL_CURR_CD" ).append("\n"); 
+		query.append("     , INV.INV_NO" ).append("\n"); 
+		query.append("     , INV.CSR_NO" ).append("\n"); 
+		query.append("     , INV.APRO_FLG" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_CNT_CD" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_SEQ" ).append("\n"); 
+		query.append("     , INV.PRNR_REF_NO" ).append("\n"); 
+		query.append("     , INV.CUST_VNDR_ENG_NM" ).append("\n"); 
+		query.append("     , INV.REV_EXP" ).append("\n"); 
+		query.append("	 , INV.ITEM" ).append("\n"); 
+		query.append("ORDER BY INV.JO_CRR_CD , INV.INV_NO" ).append("\n"); 
 
 	}
 }

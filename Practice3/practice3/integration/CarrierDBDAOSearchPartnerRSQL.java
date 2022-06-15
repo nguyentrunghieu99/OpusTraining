@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.05
+*@LastModifyDate : 2022.05.26
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.05 
+* 2022.05.26 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.dou.doutraining.practice3.integration;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author HieuNguyen
+ * @author Hieu Nguyen
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -61,7 +61,6 @@ public class CarrierDBDAOSearchPartnerRSQL implements ISQLTemplate{
 		query.append("SELECT " ).append("\n"); 
 		query.append("	DISTINCT(jo_crr_cd) as jo_crr_cd" ).append("\n"); 
 		query.append("FROM JOO_CARRIER" ).append("\n"); 
-		query.append("ORDER BY jo_crr_cd" ).append("\n"); 
 
 	}
 }

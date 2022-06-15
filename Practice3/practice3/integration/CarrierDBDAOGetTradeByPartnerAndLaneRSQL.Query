@@ -4,7 +4,7 @@
 		<query name="CarrierDBDAOGetTradeByPartnerAndLaneRSQL">
 			<desc><![CDATA[DESC Enter..]]></desc>
 			<sql><![CDATA[
-select DISTINCT TRD_CD
+select DISTINCT TRD_CD 
 from JOO_CARRIER
 WHERE
 JO_CRR_CD    IN ( #foreach($key IN ${listCrrCd})#if($velocityCount < $listCrrCd.size()) '$key', #else '$key' #end #end)

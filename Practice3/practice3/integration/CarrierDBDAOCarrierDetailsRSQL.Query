@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqls>
 	<querys>
-		<query name="CarrierDBDAOCarrierVORSQL">
-			<desc><![CDATA[ada]]></desc>
+		<query name="CarrierDBDAOCarrierDetailsRSQL">
+			<desc><![CDATA[.]]></desc>
 			<sql><![CDATA[
 SELECT INV.JO_CRR_CD
      , INV.RLANE_CD
@@ -14,6 +14,8 @@ SELECT INV.JO_CRR_CD
      , INV.CUST_VNDR_SEQ
      , INV.PRNR_REF_NO
      , INV.CUST_VNDR_ENG_NM
+	 , INV.REV_EXP
+	 , INV.ITEM
      , SUM(INV.REV_ACT_AMT) AS INV_REV_ACT_AMT
      , SUM(INV.EXP_ACT_AMT) AS INV_EXP_ACT_AMT
   FROM (
@@ -72,7 +74,6 @@ SELECT INV.JO_CRR_CD
 						   AND CRR.MODI_COST_CTR_CD  = @[trd_cd]
 					 )
 	#end
-
     AND DTL.ACCT_YRMON    = INV.ACCT_YRMON
     AND DTL.JO_CRR_CD     = INV.JO_CRR_CD
     AND DTL.INV_NO        = INV.INV_NO
@@ -101,6 +102,8 @@ SELECT INV.JO_CRR_CD
      , INV.CUST_VNDR_SEQ
      , INV.PRNR_REF_NO
      , INV.CUST_VNDR_ENG_NM
+     , INV.REV_EXP
+	 , INV.ITEM
 ORDER BY INV.JO_CRR_CD , INV.INV_NO			]]></sql>
 			<params>
 				<param name="fr_acct_yrmon" type="12" value="" out="N"/>

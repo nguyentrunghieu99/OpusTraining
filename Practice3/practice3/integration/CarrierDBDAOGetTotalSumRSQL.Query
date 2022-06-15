@@ -18,8 +18,9 @@ SELECT INV.LOCL_CURR_CD
      , JOO_CSR     CSR
     WHERE 1=1
     AND NVL(STL.THEA_STL_FLG, 'N') = 'N'
-	
+	#if (${fr_acct_yrmon} != '' && ${to_acct_yrmon} != '')
 	AND INV.ACCT_YRMON   BETWEEN REPLACE(@[fr_acct_yrmon],'-','') AND REPLACE(@[to_acct_yrmon],'-','')
+	#end
 
 
 		#if (${listCrrCd} != '')

@@ -4,10 +4,10 @@
 *@FileTitle : CarrierVO
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.18
+*@LastModifyDate : 2022.06.12
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.18  
+* 2022.06.12  
 * 1.0 Creation
 =========================================================*/
 
@@ -51,8 +51,6 @@ public class CarrierVO extends AbstractValueObject {
 	/* Column Info */
 	private String custVndrSeq = null;
 	/* Column Info */
-	private String trdCd = null;
-	/* Column Info */
 	private String joCrrCd = null;
 	/* Column Info */
 	private String rlaneCd = null;
@@ -68,8 +66,6 @@ public class CarrierVO extends AbstractValueObject {
 	private String custVndrEngNm = null;
 	/* Column Info */
 	private String invExpActAmt = null;
-	/* Column Info */
-	private String acctYrmon = null;
 	/* VO Data Value( C:Creation, U:Update, D:Delete ) */
 	private String ibflag = null;
 	/* Column Info */
@@ -87,12 +83,11 @@ public class CarrierVO extends AbstractValueObject {
 	
 	public CarrierVO() {}
 
-	public CarrierVO(String ibflag, String pagerows, String joCrrCd, String rlaneCd, String loclCurrCd, String invNo, String csrNo, String aproFlg, String custVndrCntCd, String custVndrSeq, String prnrRefNo, String custVndrEngNm, String revExp, String item, String acctYrmon, String trdCd, String invRevActAmt, String invExpActAmt) {
+	public CarrierVO(String ibflag, String pagerows, String joCrrCd, String rlaneCd, String loclCurrCd, String invNo, String csrNo, String aproFlg, String custVndrCntCd, String custVndrSeq, String prnrRefNo, String custVndrEngNm, String revExp, String item, String invRevActAmt, String invExpActAmt) {
 		this.csrNo = csrNo;
 		this.invRevActAmt = invRevActAmt;
 		this.loclCurrCd = loclCurrCd;
 		this.custVndrSeq = custVndrSeq;
-		this.trdCd = trdCd;
 		this.joCrrCd = joCrrCd;
 		this.rlaneCd = rlaneCd;
 		this.revExp = revExp;
@@ -101,7 +96,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.invNo = invNo;
 		this.custVndrEngNm = custVndrEngNm;
 		this.invExpActAmt = invExpActAmt;
-		this.acctYrmon = acctYrmon;
 		this.ibflag = ibflag;
 		this.item = item;
 		this.prnrRefNo = prnrRefNo;
@@ -117,7 +111,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.hashColumns.put("inv_rev_act_amt", getInvRevActAmt());
 		this.hashColumns.put("locl_curr_cd", getLoclCurrCd());
 		this.hashColumns.put("cust_vndr_seq", getCustVndrSeq());
-		this.hashColumns.put("trd_cd", getTrdCd());
 		this.hashColumns.put("jo_crr_cd", getJoCrrCd());
 		this.hashColumns.put("rlane_cd", getRlaneCd());
 		this.hashColumns.put("rev_exp", getRevExp());
@@ -126,7 +119,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.hashColumns.put("inv_no", getInvNo());
 		this.hashColumns.put("cust_vndr_eng_nm", getCustVndrEngNm());
 		this.hashColumns.put("inv_exp_act_amt", getInvExpActAmt());
-		this.hashColumns.put("acct_yrmon", getAcctYrmon());
 		this.hashColumns.put("ibflag", getIbflag());
 		this.hashColumns.put("item", getItem());
 		this.hashColumns.put("prnr_ref_no", getPrnrRefNo());
@@ -143,7 +135,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.hashFields.put("inv_rev_act_amt", "invRevActAmt");
 		this.hashFields.put("locl_curr_cd", "loclCurrCd");
 		this.hashFields.put("cust_vndr_seq", "custVndrSeq");
-		this.hashFields.put("trd_cd", "trdCd");
 		this.hashFields.put("jo_crr_cd", "joCrrCd");
 		this.hashFields.put("rlane_cd", "rlaneCd");
 		this.hashFields.put("rev_exp", "revExp");
@@ -152,7 +143,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.hashFields.put("inv_no", "invNo");
 		this.hashFields.put("cust_vndr_eng_nm", "custVndrEngNm");
 		this.hashFields.put("inv_exp_act_amt", "invExpActAmt");
-		this.hashFields.put("acct_yrmon", "acctYrmon");
 		this.hashFields.put("ibflag", "ibflag");
 		this.hashFields.put("item", "item");
 		this.hashFields.put("prnr_ref_no", "prnrRefNo");
@@ -190,14 +180,6 @@ public class CarrierVO extends AbstractValueObject {
 	 */
 	public String getCustVndrSeq() {
 		return this.custVndrSeq;
-	}
-	
-	/**
-	 * Column Info
-	 * @return trdCd
-	 */
-	public String getTrdCd() {
-		return this.trdCd;
 	}
 	
 	/**
@@ -262,14 +244,6 @@ public class CarrierVO extends AbstractValueObject {
 	 */
 	public String getInvExpActAmt() {
 		return this.invExpActAmt;
-	}
-	
-	/**
-	 * Column Info
-	 * @return acctYrmon
-	 */
-	public String getAcctYrmon() {
-		return this.acctYrmon;
 	}
 	
 	/**
@@ -339,14 +313,6 @@ public class CarrierVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @param trdCd
-	 */
-	public void setTrdCd(String trdCd) {
-		this.trdCd = trdCd;
-	}
-	
-	/**
-	 * Column Info
 	 * @param joCrrCd
 	 */
 	public void setJoCrrCd(String joCrrCd) {
@@ -410,14 +376,6 @@ public class CarrierVO extends AbstractValueObject {
 	}
 	
 	/**
-	 * Column Info
-	 * @param acctYrmon
-	 */
-	public void setAcctYrmon(String acctYrmon) {
-		this.acctYrmon = acctYrmon;
-	}
-	
-	/**
 	 * VO Data Value( C:Creation, U:Update, D:Delete )
 	 * @param ibflag
 	 */
@@ -466,7 +424,6 @@ public class CarrierVO extends AbstractValueObject {
 		setInvRevActAmt(JSPUtil.getParameter(request, prefix + "inv_rev_act_amt", ""));
 		setLoclCurrCd(JSPUtil.getParameter(request, prefix + "locl_curr_cd", ""));
 		setCustVndrSeq(JSPUtil.getParameter(request, prefix + "cust_vndr_seq", ""));
-		setTrdCd(JSPUtil.getParameter(request, prefix + "trd_cd", ""));
 		setJoCrrCd(JSPUtil.getParameter(request, prefix + "jo_crr_cd", ""));
 		setRlaneCd(JSPUtil.getParameter(request, prefix + "rlane_cd", ""));
 		setRevExp(JSPUtil.getParameter(request, prefix + "rev_exp", ""));
@@ -475,7 +432,6 @@ public class CarrierVO extends AbstractValueObject {
 		setInvNo(JSPUtil.getParameter(request, prefix + "inv_no", ""));
 		setCustVndrEngNm(JSPUtil.getParameter(request, prefix + "cust_vndr_eng_nm", ""));
 		setInvExpActAmt(JSPUtil.getParameter(request, prefix + "inv_exp_act_amt", ""));
-		setAcctYrmon(JSPUtil.getParameter(request, prefix + "acct_yrmon", ""));
 		setIbflag(JSPUtil.getParameter(request, prefix + "ibflag", ""));
 		setItem(JSPUtil.getParameter(request, prefix + "item", ""));
 		setPrnrRefNo(JSPUtil.getParameter(request, prefix + "prnr_ref_no", ""));
@@ -511,7 +467,6 @@ public class CarrierVO extends AbstractValueObject {
 			String[] invRevActAmt = (JSPUtil.getParameter(request, prefix	+ "inv_rev_act_amt", length));
 			String[] loclCurrCd = (JSPUtil.getParameter(request, prefix	+ "locl_curr_cd", length));
 			String[] custVndrSeq = (JSPUtil.getParameter(request, prefix	+ "cust_vndr_seq", length));
-			String[] trdCd = (JSPUtil.getParameter(request, prefix	+ "trd_cd", length));
 			String[] joCrrCd = (JSPUtil.getParameter(request, prefix	+ "jo_crr_cd", length));
 			String[] rlaneCd = (JSPUtil.getParameter(request, prefix	+ "rlane_cd", length));
 			String[] revExp = (JSPUtil.getParameter(request, prefix	+ "rev_exp", length));
@@ -520,7 +475,6 @@ public class CarrierVO extends AbstractValueObject {
 			String[] invNo = (JSPUtil.getParameter(request, prefix	+ "inv_no", length));
 			String[] custVndrEngNm = (JSPUtil.getParameter(request, prefix	+ "cust_vndr_eng_nm", length));
 			String[] invExpActAmt = (JSPUtil.getParameter(request, prefix	+ "inv_exp_act_amt", length));
-			String[] acctYrmon = (JSPUtil.getParameter(request, prefix	+ "acct_yrmon", length));
 			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
 			String[] item = (JSPUtil.getParameter(request, prefix	+ "item", length));
 			String[] prnrRefNo = (JSPUtil.getParameter(request, prefix	+ "prnr_ref_no", length));
@@ -536,8 +490,6 @@ public class CarrierVO extends AbstractValueObject {
 					model.setLoclCurrCd(loclCurrCd[i]);
 				if (custVndrSeq[i] != null)
 					model.setCustVndrSeq(custVndrSeq[i]);
-				if (trdCd[i] != null)
-					model.setTrdCd(trdCd[i]);
 				if (joCrrCd[i] != null)
 					model.setJoCrrCd(joCrrCd[i]);
 				if (rlaneCd[i] != null)
@@ -554,8 +506,6 @@ public class CarrierVO extends AbstractValueObject {
 					model.setCustVndrEngNm(custVndrEngNm[i]);
 				if (invExpActAmt[i] != null)
 					model.setInvExpActAmt(invExpActAmt[i]);
-				if (acctYrmon[i] != null)
-					model.setAcctYrmon(acctYrmon[i]);
 				if (ibflag[i] != null)
 					model.setIbflag(ibflag[i]);
 				if (item[i] != null)
@@ -597,7 +547,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.invRevActAmt = this.invRevActAmt .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.loclCurrCd = this.loclCurrCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.custVndrSeq = this.custVndrSeq .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
-		this.trdCd = this.trdCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.joCrrCd = this.joCrrCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.rlaneCd = this.rlaneCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.revExp = this.revExp .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
@@ -606,7 +555,6 @@ public class CarrierVO extends AbstractValueObject {
 		this.invNo = this.invNo .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.custVndrEngNm = this.custVndrEngNm .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.invExpActAmt = this.invExpActAmt .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
-		this.acctYrmon = this.acctYrmon .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.ibflag = this.ibflag .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.item = this.item .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.prnrRefNo = this.prnrRefNo .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");

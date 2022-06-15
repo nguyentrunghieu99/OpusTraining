@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.19
+*@LastModifyDate : 2022.06.12
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.19 
+* 2022.06.12 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.dou.doutraining.practice3.integration;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author HieuNguyen
+ * @author Hieu Nguyen
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -98,8 +98,6 @@ public class CarrierDBDAOCarrierVORSQL implements ISQLTemplate{
 		query.append("     , INV.CUST_VNDR_SEQ" ).append("\n"); 
 		query.append("     , INV.PRNR_REF_NO" ).append("\n"); 
 		query.append("     , INV.CUST_VNDR_ENG_NM" ).append("\n"); 
-		query.append("	 , INV.REV_EXP" ).append("\n"); 
-		query.append("	 , INV.ITEM" ).append("\n"); 
 		query.append("     , SUM(INV.REV_ACT_AMT) AS INV_REV_ACT_AMT" ).append("\n"); 
 		query.append("     , SUM(INV.EXP_ACT_AMT) AS INV_EXP_ACT_AMT" ).append("\n"); 
 		query.append("  FROM (" ).append("\n"); 
@@ -135,8 +133,9 @@ public class CarrierDBDAOCarrierVORSQL implements ISQLTemplate{
 		query.append("     , JOO_CSR     CSR" ).append("\n"); 
 		query.append("    WHERE 1=1" ).append("\n"); 
 		query.append("    AND INV.RJCT_CMB_FLG  = 'N'" ).append("\n"); 
-		query.append("	" ).append("\n"); 
+		query.append("	#if (${fr_acct_yrmon} != '' && ${to_acct_yrmon} != '')" ).append("\n"); 
 		query.append("	AND INV.ACCT_YRMON   BETWEEN REPLACE(@[fr_acct_yrmon],'-','') AND REPLACE(@[to_acct_yrmon],'-','')" ).append("\n"); 
+		query.append("	#end" ).append("\n"); 
 		query.append("" ).append("\n"); 
 		query.append("" ).append("\n"); 
 		query.append("	#if (${listCrrCd} != '')" ).append("\n"); 
@@ -157,7 +156,6 @@ public class CarrierDBDAOCarrierVORSQL implements ISQLTemplate{
 		query.append("						   AND CRR.MODI_COST_CTR_CD  = @[trd_cd]" ).append("\n"); 
 		query.append("					 )" ).append("\n"); 
 		query.append("	#end" ).append("\n"); 
-		query.append("" ).append("\n"); 
 		query.append("" ).append("\n"); 
 		query.append("    AND DTL.ACCT_YRMON    = INV.ACCT_YRMON" ).append("\n"); 
 		query.append("    AND DTL.JO_CRR_CD     = INV.JO_CRR_CD" ).append("\n"); 
@@ -187,8 +185,6 @@ public class CarrierDBDAOCarrierVORSQL implements ISQLTemplate{
 		query.append("     , INV.CUST_VNDR_SEQ" ).append("\n"); 
 		query.append("     , INV.PRNR_REF_NO" ).append("\n"); 
 		query.append("     , INV.CUST_VNDR_ENG_NM" ).append("\n"); 
-		query.append("     , INV.REV_EXP" ).append("\n"); 
-		query.append("	 , INV.ITEM" ).append("\n"); 
 		query.append("ORDER BY INV.JO_CRR_CD , INV.INV_NO" ).append("\n"); 
 
 	}

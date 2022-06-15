@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.12
+*@LastModifyDate : 2022.06.12
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.12 
+* 2022.06.12 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.dou.doutraining.practice3.integration;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author HieuNguyen
+ * @author Hieu Nguyen
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -67,7 +67,7 @@ public class CarrierDBDAOGetTradeByPartnerAndLaneRSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("select DISTINCT TRD_CD" ).append("\n"); 
+		query.append("select DISTINCT TRD_CD " ).append("\n"); 
 		query.append("from JOO_CARRIER" ).append("\n"); 
 		query.append("WHERE" ).append("\n"); 
 		query.append("JO_CRR_CD    IN ( #foreach($key IN ${listCrrCd})#if($velocityCount < $listCrrCd.size()) '$key', #else '$key' #end #end)" ).append("\n"); 

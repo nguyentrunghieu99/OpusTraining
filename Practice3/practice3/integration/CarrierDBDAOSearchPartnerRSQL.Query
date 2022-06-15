@@ -6,8 +6,7 @@
 			<sql><![CDATA[
 SELECT 
 	DISTINCT(jo_crr_cd) as jo_crr_cd
-FROM JOO_CARRIER
-ORDER BY jo_crr_cd			]]></sql>
+FROM JOO_CARRIER			]]></sql>
 			<params>
 			</params>
 		</query>

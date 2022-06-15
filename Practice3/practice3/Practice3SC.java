@@ -23,7 +23,7 @@ import com.clt.framework.support.view.signon.SignOnUserAccount;
 
 public class Practice3SC extends ServiceCommandSupport {
 	private SignOnUserAccount account = null;
-	
+
 	public void doStart() {
 		log.debug("CarrierSC 시작");
 		try {
@@ -45,165 +45,158 @@ public class Practice3SC extends ServiceCommandSupport {
 	@Override
 	public EventResponse perform(Event e) throws EventException {
 		EventResponse eventResponse = null;
+		
 		if (e.getEventName().equalsIgnoreCase("DouTrn0003Event")) {
-			if (e.getFormCommand().isCommand(FormCommand.SEARCH)) {
+			if (e.getFormCommand().isCommand(FormCommand.SEARCH) ||e.getFormCommand().isCommand(FormCommand.SEARCH01) ) {
 				eventResponse = searchCarrier(e);
-				
 			}else if (e.getFormCommand().isCommand(FormCommand.DEFAULT)) {
 				eventResponse = initData();
-			}else if (e.getFormCommand().isCommand(FormCommand.SEARCH01)) {
+			} else if (e.getFormCommand().isCommand(FormCommand.SEARCH02)) {
 				eventResponse = searchLaneByPartner(e);
-			}else if (e.getFormCommand().isCommand(FormCommand.SEARCH02)) {
+			} else if (e.getFormCommand().isCommand(FormCommand.SEARCH03)) {
 				eventResponse = searchTradeByPartnerAndLane(e);
-			}else if (e.getFormCommand().isCommand(FormCommand.SEARCH03)) {
+			} else if (e.getFormCommand().isCommand(FormCommand.SEARCH04)) {
 				eventResponse = searchTotalSum(e);
-			}	
-	}
+			}
+		}
 		return eventResponse;
-
-}
+	}
 	
+	
+	//Get the data of carrier or details 
 	private EventResponse searchCarrier(Event e) throws EventException {
 		// PDTO(Data Transfer Object including Parameters)
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
-		DouTrn0003Event event = (DouTrn0003Event)e;
+		DouTrn0003Event event = (DouTrn0003Event) e;
 		Practice3BC command = new Practice3BCImpl();
 
-		try{
-			List<CarrierVO> list = command.searchCarrier(event.getCarrierVO());
-//			List<CarrierVO> listTotalSum = command.searchTotalSum(event.getCarrierVO());
-//			for(CarrierVO carrierVO: listTotalSum){
-//				list.add(carrierVO);
-//			}
-			
+		try {
+			List<CarrierVO> list = command.searchCarrier(event.getCarrierVO(), event.getOtherVO());
 			eventResponse.setRsVoList(list);
-			
-			
-			
-		}catch(EventException ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}catch(Exception ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+		} catch (EventException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
 		return eventResponse;
 	}
-	
+
+	//Get the data of totalSum
 	private EventResponse searchTotalSum(Event e) throws EventException {
 		// PDTO(Data Transfer Object including Parameters)
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
-		DouTrn0003Event event = (DouTrn0003Event)e;
+		DouTrn0003Event event = (DouTrn0003Event) e;
 		Practice3BC command = new Practice3BCImpl();
 
-		try{
-			List<CarrierVO> list = command.searchTotalSum(event.getCarrierVO());
-			Map<String,String> totalSum = new HashMap<String, String>();
-			int count = 0;
+		try {
+			List<CarrierVO> list = command.searchCarrier(event.getCarrierVO(),event.getOtherVO());
+			Map<String, String> totalSum = new HashMap<String, String>();
 			int countCurr = list.size();
 			totalSum.put("countCurr", String.valueOf(countCurr));
-			if(null != list && list.size() > 0){
-				for(CarrierVO carrierVO: list){
-					count ++;
-					totalSum.put("Curr" + count, carrierVO.getLoclCurrCd());
-					totalSum.put("Rev" + count, carrierVO.getInvRevActAmt());
-					totalSum.put("Exp" + count, carrierVO.getInvExpActAmt());			
+			
+			int count = 0;
+			if (null != list && list.size() > 0) {
+				for (CarrierVO carrierVO : list) {
+					count++;
+					totalSum.put("curr" + count, carrierVO.getLoclCurrCd());
+					totalSum.put("rev" + count, carrierVO.getInvRevActAmt());
+					totalSum.put("exp" + count, carrierVO.getInvExpActAmt());
 				}
-	
-				}
-				eventResponse.setETCData(totalSum);
-//			}
-			
-			
-			
-		}catch(EventException ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}catch(Exception ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+
+			}
+			eventResponse.setETCData(totalSum);
+
+		} catch (EventException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
 		return eventResponse;
 	}
 	
-	
-	
+	//Get the data for comboBox Partner
 	private EventResponse initData() throws EventException {
 		// PDTO(Data Transfer Object including Parameters)
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
 		Practice3BC command = new Practice3BCImpl();
 
-		try{
-			List<CarrierVO> listPartner = command.searchPartner();
+		try {
+			List<String> listPartner = command.searchPartner();
 			StringBuilder partnerBuilder = new StringBuilder();
-			if(null != listPartner && listPartner.size() > 0){
-				for(int i =0; i < listPartner.size(); i++){
-					partnerBuilder.append(listPartner.get(i).getJoCrrCd());
-					if (i < listPartner.size() - 1){
+			if (null != listPartner && listPartner.size() > 0) {
+				for (int i = 0; i < listPartner.size(); i++) {
+					partnerBuilder.append(listPartner.get(i));
+					if (i < listPartner.size() - 1) {
 						partnerBuilder.append("|");
-					}	
+					}
 				}
 				eventResponse.setETCData("partners", partnerBuilder.toString());
 			}
-			
-		}catch(EventException ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}catch(Exception ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+
+		} catch (EventException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
 		return eventResponse;
 	}
 	
+	//Get the data for comboBox Lane
 	private EventResponse searchLaneByPartner(Event e) throws EventException {
 		// PDTO(Data Transfer Object including Parameters)
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
-		DouTrn0003Event event = (DouTrn0003Event)e;
+		DouTrn0003Event event = (DouTrn0003Event) e;
 		Practice3BC command = new Practice3BCImpl();
 
-		try{
-				List<CarrierVO> listLane = command.searchLane(event.getCarrierVO());
-				StringBuilder laneBuilder = new StringBuilder();
-				
-				if(null != listLane && listLane.size() > 0){
-					for(int i =0; i < listLane.size(); i++){
-						laneBuilder.append(listLane.get(i).getRlaneCd());
-						if (i < listLane.size() - 1){
-							laneBuilder.append("|");
-						}	
+		try {
+			List<String> listLane = command.searchLane(event.getCarrierVO());
+			StringBuilder laneBuilder = new StringBuilder();
+			
+			if (!listLane.isEmpty()) {
+				for (int i = 0; i < listLane.size(); i++) {
+					laneBuilder.append(listLane.get(i));
+					if (i < listLane.size() - 1) {
+						laneBuilder.append("|");
 					}
-					eventResponse.setETCData("lanes", laneBuilder.toString());
 				}
-				
-		}catch(EventException ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}catch(Exception ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+				eventResponse.setETCData("lanes", laneBuilder.toString());
+			}
+
+		} catch (EventException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
 		return eventResponse;
 	}
 	
-	private EventResponse searchTradeByPartnerAndLane(Event e) throws EventException {
+	//Get the data for comboBox Trade
+	private EventResponse searchTradeByPartnerAndLane(Event e)
+			throws EventException {
 		// PDTO(Data Transfer Object including Parameters)
 		GeneralEventResponse eventResponse = new GeneralEventResponse();
-		DouTrn0003Event event = (DouTrn0003Event)e;
+		DouTrn0003Event event = (DouTrn0003Event) e;
 		Practice3BC command = new Practice3BCImpl();
 
-		try{
-				List<CarrierVO> listTrade = command.searchTrade(event.getCarrierVO());
-				StringBuilder tradeBuilder = new StringBuilder();
-				
-				if(null != listTrade && listTrade.size() > 0){
-					for(int i =0; i < listTrade.size(); i++){
-						tradeBuilder.append(listTrade.get(i).getTrdCd());
-						if (i < listTrade.size() - 1){
-							tradeBuilder.append("|");
-						}	
+		try {
+			List<String> listTrade = command.searchTrade(event.getCarrierVO());
+			StringBuilder tradeBuilder = new StringBuilder();
+
+			if (null != listTrade && listTrade.size() > 0) {
+				for (int i = 0; i < listTrade.size(); i++) {
+					tradeBuilder.append(listTrade.get(i));
+					if (i < listTrade.size() - 1) {
+						tradeBuilder.append("|");
 					}
-					eventResponse.setETCData("trades", tradeBuilder.toString());
 				}
-				
-		}catch(EventException ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}catch(Exception ex){
-			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+				eventResponse.setETCData("trades", tradeBuilder.toString());
+			}
+
+		} catch (EventException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(), ex);
+		}
 		return eventResponse;
 	}
 }
-

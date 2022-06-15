@@ -9,11 +9,10 @@
 <%@ page import="org.apache.log4j.Logger" %>
 
 <%
-	DouTrn0003Event  event = null;					//PDTO(Data Transfer Object including Parameters)
-	Exception serverException   = null;			//서버에서 발생한 에러
-	String strErrMsg = "";						//에러메세지
-	int rowCount	 = 0;						//DB ResultSet 리스트의 건수
-
+	DouTrn0003Event  event = null;
+	Exception serverException   = null;
+	String strErrMsg = "";
+	
 	String successFlag = "";
 	String codeList  = "";
 	String pageRows  = "100";
