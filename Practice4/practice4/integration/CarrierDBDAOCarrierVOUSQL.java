@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.30
+*@LastModifyDate : 2022.06.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.30 
+* 2022.06.10 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.dou.doutraining.practice4.integration;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author Hieu Nguyen
+ * @author HieuNguyen
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -61,7 +61,21 @@ public class CarrierDBDAOCarrierVOUSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
+		params.put("rlane_cd_copy",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
 		params.put("rlane_cd",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("jo_crr_cd_copy",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
@@ -124,8 +138,10 @@ public class CarrierDBDAOCarrierVOUSQL implements ISQLTemplate{
 		query.append(",	VNDR_SEQ = @[vndr_seq]" ).append("\n"); 
 		query.append(",	UPD_DT = sysdate" ).append("\n"); 
 		query.append(",	UPD_USR_ID = @[upd_usr_id]" ).append("\n"); 
-		query.append("WHERE	JO_CRR_CD = @[jo_crr_cd]" ).append("\n"); 
-		query.append("AND 	RLANE_CD = @[rlane_cd]" ).append("\n"); 
+		query.append(",   JO_CRR_CD =@[jo_crr_cd]" ).append("\n"); 
+		query.append(",   RLANE_CD = @[rlane_cd]" ).append("\n"); 
+		query.append("WHERE	JO_CRR_CD = @[jo_crr_cd_copy]" ).append("\n"); 
+		query.append("AND 	RLANE_CD = @[rlane_cd_copy]" ).append("\n"); 
 
 	}
 }

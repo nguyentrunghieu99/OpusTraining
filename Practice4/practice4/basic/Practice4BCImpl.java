@@ -56,19 +56,23 @@ public class Practice4BCImpl  extends BasicCommandSupport implements Practice4BC
 			List<CarrierVOS> updateVoList = new ArrayList<CarrierVOS>();
 			List<CarrierVOS> deleteVoList = new ArrayList<CarrierVOS>();
 			for (int i = 0; i < carrierVOS.length; i++) {
-				if (carrierVOS[i].getIbflag().equals("I")) {
-					if(dbDao.checkDuplicate(carrierVOS[i]) == 1)
-					{
+				if (carrierVOS[i].getIbflag().equals("D")) {
+					deleteVoList.add(carrierVOS[i]);
+				}else if (carrierVOS[i].getIbflag().equals("I")) {
+					if(dbDao.checkDuplicate(carrierVOS[i]) == 1){
 						throw new DAOException(new ErrorHandler("ERR00000", new String[] {carrierVOS[i].getJoCrrCd() + " - " + carrierVOS[i].getRlaneCd()}).getMessage());
-					}
+						}
 					carrierVOS[i].setCreUsrId(account.getUsr_id());
 					carrierVOS[i].setUpdUsrId(account.getUsr_id());
 					insertVoList.add(carrierVOS[i]);
-				} else if(carrierVOS[i].getIbflag().equals("U")) {
-					carrierVOS[i].setUpdUsrId(account.getUsr_id());
-					updateVoList.add(carrierVOS[i]);
-				}else if (carrierVOS[i].getIbflag().equals("D")) {
-					deleteVoList.add(carrierVOS[i]);
+				}else if(carrierVOS[i].getIbflag().equals("U")){
+						if(!carrierVOS[i].getJoCrrCd().equals(carrierVOS[i].getJoCrrCdCopy()) || !carrierVOS[i].getRlaneCd().equals(carrierVOS[i].getRlaneCdCopy())){
+							if(dbDao.checkDuplicate(carrierVOS[i]) == 1){
+								throw new DAOException(new ErrorHandler("ERR00000", new String[] {carrierVOS[i].getJoCrrCd() + " - " + carrierVOS[i].getRlaneCd()}).getMessage());
+								}
+						}
+						carrierVOS[i].setUpdUsrId(account.getUsr_id());
+						updateVoList.add(carrierVOS[i]);
 				}
 			}
 

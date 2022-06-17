@@ -12,8 +12,10 @@ UPDATE JOO_CARRIER SET
 ,	VNDR_SEQ = @[vndr_seq]
 ,	UPD_DT = sysdate
 ,	UPD_USR_ID = @[upd_usr_id]
-WHERE	JO_CRR_CD = @[jo_crr_cd]
-AND 	RLANE_CD = @[rlane_cd]			]]></sql>
+,   JO_CRR_CD =@[jo_crr_cd]
+,   RLANE_CD = @[rlane_cd]
+WHERE	JO_CRR_CD = @[jo_crr_cd_copy]
+AND 	RLANE_CD = @[rlane_cd_copy]			]]></sql>
 			<params>
 				<param name="delt_flg" type="12" value="" out="N"/>
 				<param name="trd_cd" type="12" value="" out="N"/>
@@ -23,6 +25,8 @@ AND 	RLANE_CD = @[rlane_cd]			]]></sql>
 				<param name="upd_usr_id" type="12" value="" out="N"/>
 				<param name="jo_crr_cd" type="12" value="" out="N"/>
 				<param name="rlane_cd" type="12" value="" out="N"/>
+				<param name="jo_crr_cd_copy" type="12" value="" out="N"/>
+				<param name="rlane_cd_copy" type="12" value="" out="N"/>
 			</params>
 		</query>
 	</querys>

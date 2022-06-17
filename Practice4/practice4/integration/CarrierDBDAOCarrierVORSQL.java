@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.31
+*@LastModifyDate : 2022.06.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.31 
+* 2022.06.10 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.dou.doutraining.practice4.integration;
@@ -18,7 +18,7 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author Hieu Nguyen
+ * @author HieuNguyen
  * @see DAO 참조
  * @since J2EE 1.6
  */
@@ -82,7 +82,9 @@ public class CarrierDBDAOCarrierVORSQL implements ISQLTemplate{
 	 */
 	public void setQuery(){
 		query.append("SELECT A.JO_CRR_CD" ).append("\n"); 
+		query.append(" ,A.JO_CRR_CD AS JO_CRR_CD_COPY" ).append("\n"); 
 		query.append(" ,A.RLANE_CD" ).append("\n"); 
+		query.append(" ,A.RLANE_CD AS RLANE_CD_COPY" ).append("\n"); 
 		query.append(" ,A.VNDR_SEQ" ).append("\n"); 
 		query.append(" ,A.CUST_CNT_CD" ).append("\n"); 
 		query.append(" ,A.CUST_SEQ" ).append("\n"); 

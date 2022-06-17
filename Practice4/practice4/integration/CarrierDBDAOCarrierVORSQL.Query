@@ -5,7 +5,9 @@
 			<desc><![CDATA[.]]></desc>
 			<sql><![CDATA[
 SELECT A.JO_CRR_CD
+ ,A.JO_CRR_CD AS JO_CRR_CD_COPY
  ,A.RLANE_CD
+ ,A.RLANE_CD AS RLANE_CD_COPY
  ,A.VNDR_SEQ
  ,A.CUST_CNT_CD
  ,A.CUST_SEQ

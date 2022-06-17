@@ -4,10 +4,10 @@
 *@FileTitle : CarrierVOS
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.05.25
+*@LastModifyDate : 2022.06.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2022.05.25  
+* 2022.06.10  
 * 1.0 Creation
 =========================================================*/
 
@@ -58,12 +58,16 @@ public class CarrierVOS extends AbstractValueObject {
 	private String custSeq = null;
 	/* Page Number */
 	private String pagerows = null;
+	/* Column Info */
+	private String creUsrId = null;
 	/* VO Data Value( C:Creation, U:Update, D:Delete ) */
 	private String ibflag = null;
 	/* Column Info */
-	private String creUsrId = null;
+	private String joCrrCdCopy = null;
 	/* Column Info */
 	private String vndrSeq = null;
+	/* Column Info */
+	private String rlaneCdCopy = null;
 	/* Column Info */
 	private String updUsrId = null;
 	/* Column Info */
@@ -77,7 +81,7 @@ public class CarrierVOS extends AbstractValueObject {
 	
 	public CarrierVOS() {}
 
-	public CarrierVOS(String ibflag, String pagerows, String joCrrCd, String rlaneCd, String vndrSeq, String custCntCd, String custSeq, String trdCd, String deltFlg, String creDt, String creUsrId, String updDt, String updUsrId) {
+	public CarrierVOS(String ibflag, String pagerows, String joCrrCd, String creDt, String joCrrCdCopy, String rlaneCd, String rlaneCdCopy, String vndrSeq, String custCntCd, String custSeq, String trdCd, String deltFlg, String creUsrId, String updDt, String updUsrId) {
 		this.updDt = updDt;
 		this.deltFlg = deltFlg;
 		this.creDt = creDt;
@@ -86,9 +90,11 @@ public class CarrierVOS extends AbstractValueObject {
 		this.rlaneCd = rlaneCd;
 		this.custSeq = custSeq;
 		this.pagerows = pagerows;
-		this.ibflag = ibflag;
 		this.creUsrId = creUsrId;
+		this.ibflag = ibflag;
+		this.joCrrCdCopy = joCrrCdCopy;
 		this.vndrSeq = vndrSeq;
+		this.rlaneCdCopy = rlaneCdCopy;
 		this.updUsrId = updUsrId;
 		this.custCntCd = custCntCd;
 	}
@@ -106,9 +112,11 @@ public class CarrierVOS extends AbstractValueObject {
 		this.hashColumns.put("rlane_cd", getRlaneCd());
 		this.hashColumns.put("cust_seq", getCustSeq());
 		this.hashColumns.put("pagerows", getPagerows());
-		this.hashColumns.put("ibflag", getIbflag());
 		this.hashColumns.put("cre_usr_id", getCreUsrId());
+		this.hashColumns.put("ibflag", getIbflag());
+		this.hashColumns.put("jo_crr_cd_copy", getJoCrrCdCopy());
 		this.hashColumns.put("vndr_seq", getVndrSeq());
+		this.hashColumns.put("rlane_cd_copy", getRlaneCdCopy());
 		this.hashColumns.put("upd_usr_id", getUpdUsrId());
 		this.hashColumns.put("cust_cnt_cd", getCustCntCd());
 		return this.hashColumns;
@@ -127,9 +135,11 @@ public class CarrierVOS extends AbstractValueObject {
 		this.hashFields.put("rlane_cd", "rlaneCd");
 		this.hashFields.put("cust_seq", "custSeq");
 		this.hashFields.put("pagerows", "pagerows");
-		this.hashFields.put("ibflag", "ibflag");
 		this.hashFields.put("cre_usr_id", "creUsrId");
+		this.hashFields.put("ibflag", "ibflag");
+		this.hashFields.put("jo_crr_cd_copy", "joCrrCdCopy");
 		this.hashFields.put("vndr_seq", "vndrSeq");
+		this.hashFields.put("rlane_cd_copy", "rlaneCdCopy");
 		this.hashFields.put("upd_usr_id", "updUsrId");
 		this.hashFields.put("cust_cnt_cd", "custCntCd");
 		return this.hashFields;
@@ -200,6 +210,14 @@ public class CarrierVOS extends AbstractValueObject {
 	}
 	
 	/**
+	 * Column Info
+	 * @return creUsrId
+	 */
+	public String getCreUsrId() {
+		return this.creUsrId;
+	}
+	
+	/**
 	 * VO Data Value( C:Creation, U:Update, D:Delete )
 	 * @return ibflag
 	 */
@@ -209,10 +227,10 @@ public class CarrierVOS extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @return creUsrId
+	 * @return joCrrCdCopy
 	 */
-	public String getCreUsrId() {
-		return this.creUsrId;
+	public String getJoCrrCdCopy() {
+		return this.joCrrCdCopy;
 	}
 	
 	/**
@@ -221,6 +239,14 @@ public class CarrierVOS extends AbstractValueObject {
 	 */
 	public String getVndrSeq() {
 		return this.vndrSeq;
+	}
+	
+	/**
+	 * Column Info
+	 * @return rlaneCdCopy
+	 */
+	public String getRlaneCdCopy() {
+		return this.rlaneCdCopy;
 	}
 	
 	/**
@@ -305,6 +331,14 @@ public class CarrierVOS extends AbstractValueObject {
 	}
 	
 	/**
+	 * Column Info
+	 * @param creUsrId
+	 */
+	public void setCreUsrId(String creUsrId) {
+		this.creUsrId = creUsrId;
+	}
+	
+	/**
 	 * VO Data Value( C:Creation, U:Update, D:Delete )
 	 * @param ibflag
 	 */
@@ -314,10 +348,10 @@ public class CarrierVOS extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @param creUsrId
+	 * @param joCrrCdCopy
 	 */
-	public void setCreUsrId(String creUsrId) {
-		this.creUsrId = creUsrId;
+	public void setJoCrrCdCopy(String joCrrCdCopy) {
+		this.joCrrCdCopy = joCrrCdCopy;
 	}
 	
 	/**
@@ -326,6 +360,14 @@ public class CarrierVOS extends AbstractValueObject {
 	 */
 	public void setVndrSeq(String vndrSeq) {
 		this.vndrSeq = vndrSeq;
+	}
+	
+	/**
+	 * Column Info
+	 * @param rlaneCdCopy
+	 */
+	public void setRlaneCdCopy(String rlaneCdCopy) {
+		this.rlaneCdCopy = rlaneCdCopy;
 	}
 	
 	/**
@@ -365,9 +407,11 @@ public class CarrierVOS extends AbstractValueObject {
 		setRlaneCd(JSPUtil.getParameter(request, prefix + "rlane_cd", ""));
 		setCustSeq(JSPUtil.getParameter(request, prefix + "cust_seq", ""));
 		setPagerows(JSPUtil.getParameter(request, prefix + "pagerows", ""));
-		setIbflag(JSPUtil.getParameter(request, prefix + "ibflag", ""));
 		setCreUsrId(JSPUtil.getParameter(request, prefix + "cre_usr_id", ""));
+		setIbflag(JSPUtil.getParameter(request, prefix + "ibflag", ""));
+		setJoCrrCdCopy(JSPUtil.getParameter(request, prefix + "jo_crr_cd_copy", ""));
 		setVndrSeq(JSPUtil.getParameter(request, prefix + "vndr_seq", ""));
+		setRlaneCdCopy(JSPUtil.getParameter(request, prefix + "rlane_cd_copy", ""));
 		setUpdUsrId(JSPUtil.getParameter(request, prefix + "upd_usr_id", ""));
 		setCustCntCd(JSPUtil.getParameter(request, prefix + "cust_cnt_cd", ""));
 	}
@@ -405,9 +449,11 @@ public class CarrierVOS extends AbstractValueObject {
 			String[] rlaneCd = (JSPUtil.getParameter(request, prefix	+ "rlane_cd", length));
 			String[] custSeq = (JSPUtil.getParameter(request, prefix	+ "cust_seq", length));
 			String[] pagerows = (JSPUtil.getParameter(request, prefix	+ "pagerows", length));
-			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
 			String[] creUsrId = (JSPUtil.getParameter(request, prefix	+ "cre_usr_id", length));
+			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
+			String[] joCrrCdCopy = (JSPUtil.getParameter(request, prefix	+ "jo_crr_cd_copy", length));
 			String[] vndrSeq = (JSPUtil.getParameter(request, prefix	+ "vndr_seq", length));
+			String[] rlaneCdCopy = (JSPUtil.getParameter(request, prefix	+ "rlane_cd_copy", length));
 			String[] updUsrId = (JSPUtil.getParameter(request, prefix	+ "upd_usr_id", length));
 			String[] custCntCd = (JSPUtil.getParameter(request, prefix	+ "cust_cnt_cd", length));
 			
@@ -429,12 +475,16 @@ public class CarrierVOS extends AbstractValueObject {
 					model.setCustSeq(custSeq[i]);
 				if (pagerows[i] != null)
 					model.setPagerows(pagerows[i]);
-				if (ibflag[i] != null)
-					model.setIbflag(ibflag[i]);
 				if (creUsrId[i] != null)
 					model.setCreUsrId(creUsrId[i]);
+				if (ibflag[i] != null)
+					model.setIbflag(ibflag[i]);
+				if (joCrrCdCopy[i] != null)
+					model.setJoCrrCdCopy(joCrrCdCopy[i]);
 				if (vndrSeq[i] != null)
 					model.setVndrSeq(vndrSeq[i]);
+				if (rlaneCdCopy[i] != null)
+					model.setRlaneCdCopy(rlaneCdCopy[i]);
 				if (updUsrId[i] != null)
 					model.setUpdUsrId(updUsrId[i]);
 				if (custCntCd[i] != null)
@@ -476,9 +526,11 @@ public class CarrierVOS extends AbstractValueObject {
 		this.rlaneCd = this.rlaneCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.custSeq = this.custSeq .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.pagerows = this.pagerows .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
-		this.ibflag = this.ibflag .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.creUsrId = this.creUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.ibflag = this.ibflag .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.joCrrCdCopy = this.joCrrCdCopy .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.vndrSeq = this.vndrSeq .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.rlaneCdCopy = this.rlaneCdCopy .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.updUsrId = this.updUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.custCntCd = this.custCntCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 	}
